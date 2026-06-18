@@ -45,7 +45,7 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
 }
 
 export default function MenuSection({ lang }: MenuSectionProps) {
-  const [activeTab, setActiveTab] = useState<'food' | 'chefs' | 'drinks' | 'addons'>('food');
+  const [activeTab, setActiveTab] = useState<'food' | 'chefs' | 'drinks' | 'addons' | 'guest'>('food');
 
   const t = {
     titleEn: 'Creative Culinary Showcase',
@@ -60,6 +60,8 @@ export default function MenuSection({ lang }: MenuSectionProps) {
     tabDrinksEl: 'Ποτά & Κρασιά',
     tabAddonsEn: 'Add-ons & Desserts',
     tabAddonsEl: 'Συνοδευτικά & Γλυκά',
+    tabGuestEn: 'Guest Menu',
+    tabGuestEl: 'Μενού Φιλοξενίας',
     orderBtnEn: 'Order Now',
     orderBtnEl: 'Παραγγελία Τώρα',
     currency: '€'
@@ -130,13 +132,14 @@ export default function MenuSection({ lang }: MenuSectionProps) {
             { key: 'food', labelEn: t.tabFoodEn, labelEl: t.tabFoodEl },
             { key: 'chefs', labelEn: t.tabChefsEn, labelEl: t.tabChefsEl },
             { key: 'drinks', labelEn: t.tabDrinksEn, labelEl: t.tabDrinksEl },
-            { key: 'addons', labelEn: t.tabAddonsEn, labelEl: t.tabAddonsEl }
+            { key: 'addons', labelEn: t.tabAddonsEn, labelEl: t.tabAddonsEl },
+            { key: 'guest', labelEn: t.tabGuestEn, labelEl: t.tabGuestEl }
           ].map((tab) => {
             const isSelected = activeTab === tab.key;
             return (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key as 'food' | 'chefs' | 'drinks' | 'addons')}
+                onClick={() => setActiveTab(tab.key as 'food' | 'chefs' | 'drinks' | 'addons' | 'guest')}
                 className={`px-6 py-3 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 font-sans font-medium cursor-pointer flex-1 text-center min-w-[140px] ${
                   isSelected
                     ? 'bg-[#d4af37] text-[#050914] shadow-[0_4px_20px_rgba(212,175,55,0.35)]'
