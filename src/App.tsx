@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Clock, MapPin, Phone, Star, Sparkles, ChevronDown, Award, Compass, Facebook, Mail, MessageCircle } from 'lucide-react';
 
@@ -41,11 +41,6 @@ function Reveal({
 
 export default function App() {
   const [lang, setLang] = useState<Language>('el'); // Defaulting to Greek as requested
-
-  // Prevent background glitching & track scroll progress
-  useEffect(() => {
-    // Global scrolling adjustments if required
-  }, []);
 
   const toggleLanguage = () => {
     setLang((prev) => (prev === 'el' ? 'en' : 'el'));
