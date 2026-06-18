@@ -183,7 +183,7 @@ export default function MenuSection({ lang }: MenuSectionProps) {
                     )}
 
                     {/* Price badge — food & chef's choice */}
-                    {(activeTab === 'food' || activeTab === 'chefs') && (
+                    {(activeTab === 'food' || activeTab === 'chefs' || activeTab === 'guest') && (
                       <span className="absolute bottom-4 right-4 bg-luxury-navy/95 backdrop-blur border border-luxury-gold text-luxury-gold text-sm font-semibold px-4 py-1.5 rounded-lg shadow-xl font-mono">
                         {item.price} {t.currency}
                       </span>
