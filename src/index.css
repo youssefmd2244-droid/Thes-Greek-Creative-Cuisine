@@ -51,6 +51,18 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
+/* GPU-accelerate animated elements */
+[data-motion], .motion-safe\:will-change-transform {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reduce paint areas */
+img {
+  content-visibility: auto;
+}
 ::-webkit-scrollbar-track {
   background: #050914;
 }
