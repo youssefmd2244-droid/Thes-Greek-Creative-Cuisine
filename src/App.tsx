@@ -220,8 +220,8 @@ export default function App() {
               className="col-span-8 overflow-hidden rounded-2xl border border-luxury-gold/10 aspect-[4/5] bg-luxury-navy shadow-2xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=800"
-                alt="Cozy Athenian stone interior lighting"
+                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=800"
+                alt="Fine Greek wines and spirits selection"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover brightness-95 hover:scale-105 transition-transform duration-700"
               />
