@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Globe, Menu as Hamburger, X, Sparkles } from 'lucide-react';
+import { Globe, Menu as Hamburger, X } from 'lucide-react';
 import { useState } from 'react';
 import { Language } from '../types';
 
@@ -26,8 +26,50 @@ export default function Header({ lang, setLang, langToggle }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo and Brand */}
         <a href="#home" className="flex items-center gap-3 group focus:outline-none">
-          <div className="w-10 h-10 rounded-full border border-luxury-gold flex items-center justify-center bg-[#091122] shadow-[0_0_15px_rgba(212,175,55,0.2)] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all">
-            <span className="font-display text-xs text-luxury-gold tracking-widest font-semibold">T.</span>
+          {/* RPG glowing spinning icon */}
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            {/* Outer glow ring — pulses in/out */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.55) 0%, transparent 75%)' }}
+              animate={{ scale: [1, 1.55, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            {/* Second glow ring offset */}
+            <motion.div
+              className="absolute inset-0 rounded-full border border-[#d4af37]/40"
+              animate={{ scale: [1, 1.35, 1], opacity: [0.9, 0, 0.9] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            />
+            {/* Spinning orbit ring */}
+            <motion.div
+              className="absolute w-14 h-14 rounded-full border border-[#d4af37]/25"
+              style={{ borderTopColor: '#d4af37', borderRightColor: 'transparent', borderBottomColor: 'transparent', borderLeftColor: 'transparent' }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+            />
+            {/* Counter-spinning dot orbit */}
+            <motion.div
+              className="absolute w-16 h-16"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
+            </motion.div>
+            {/* Core circle */}
+            <motion.div
+              className="relative z-10 w-10 h-10 rounded-full border border-luxury-gold bg-[#091122] flex items-center justify-center"
+              animate={{ boxShadow: ['0 0 8px rgba(212,175,55,0.3)', '0 0 22px rgba(212,175,55,0.8)', '0 0 8px rgba(212,175,55,0.3)'] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <motion.span
+                className="font-display text-xs text-luxury-gold tracking-widest font-semibold"
+                animate={{ opacity: [1, 0.4, 1] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                T.
+              </motion.span>
+            </motion.div>
           </div>
           <div>
             <span className="block font-display text-sm tracking-[0.25em] text-white uppercase group-hover:text-luxury-gold transition-colors">
