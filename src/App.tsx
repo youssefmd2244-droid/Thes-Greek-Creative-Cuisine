@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
 import { Clock, MapPin, Phone, MessageSquare, Star, Sparkles, ChevronDown, Award, Compass, Heart, Facebook, Mail, MessageCircle } from 'lucide-react';
 
 import { Language } from './types';
@@ -8,6 +8,36 @@ import MenuSection from './components/MenuSection';
 import IconCodeShowcase from './components/IconCodeShowcase';
 import FloatingControls from './components/FloatingControls';
 import { TESTIMONIALS } from './data';
+
+// Bidirectional scroll-reveal wrapper
+// Slides up from below when entering, slides up and fades when leaving above
+function Reveal({
+  children,
+  delay = 0,
+  className = '',
+  y = 48,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  y?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.12, margin: '0px 0px -40px 0px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      style={{ willChange: 'transform, opacity' }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function App() {
   const [lang, setLang] = useState<Language>('el'); // Defaulting to Greek as requested
@@ -185,7 +215,7 @@ export default function App() {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.12 }}
               transition={{ duration: 0.8 }}
               className="col-span-8 overflow-hidden rounded-2xl border border-luxury-gold/10 aspect-[4/5] bg-luxury-navy shadow-2xl"
             >
@@ -202,7 +232,7 @@ export default function App() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: false, amount: 0.12 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="overflow-hidden rounded-2xl border border-luxury-gold/10 aspect-square bg-luxury-navy shadow-xl"
               >
@@ -217,7 +247,7 @@ export default function App() {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: false, amount: 0.12 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="overflow-hidden rounded-2xl border border-luxury-gold/10 bg-[#0d1527] flex-grow flex flex-col justify-center items-center p-4 text-center shadow-lg"
               >
@@ -234,7 +264,7 @@ export default function App() {
           </div>
 
           {/* Column 2: Editorial Philosophy Text Column */}
-          <div className="lg:col-span-6">
+          <Reveal delay={0.15} className="lg:col-span-6">
             <span className="text-xs uppercase tracking-[0.3em] text-[#d4af37] block mb-3 font-display">
               {lang === 'en' ? t.aboutLabelEn : t.aboutLabelEl}
             </span>
@@ -274,7 +304,7 @@ export default function App() {
                 </span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
         </div>
       </section>
@@ -285,7 +315,7 @@ export default function App() {
       {/* 5. Ambient Testimonials segment */}
       <section id="team" className="py-24 bg-[#050914] relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <Reveal className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs uppercase tracking-[0.3em] text-[#d4af37] block mb-3 font-display">
               {lang === 'en' ? 'The Guest Ledger' : 'Το Βιβλίο των Φιλοξενούμενων'}
             </span>
@@ -293,15 +323,15 @@ export default function App() {
               {lang === 'en' ? t.criticsEn : t.criticsEl}
             </h3>
             <div className="w-12 h-[1px] bg-luxury-gold mx-auto mt-4" />
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {TESTIMONIALS.map((test) => (
+            {TESTIMONIALS.map((test, idx) => (
+              <Reveal key={test.id} delay={idx * 0.12}>
               <motion.div
-                key={test.id}
                 initial={{ opacity: 0, scale: 0.96 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
                 className="bg-[#091122] border border-luxury-gold/10 p-8 rounded-2xl flex flex-col justify-between shadow-lg"
               >
                 <div className="mb-6">
@@ -329,6 +359,7 @@ export default function App() {
                   <Sparkles className="w-5 h-5 text-luxury-gold/30" />
                 </div>
               </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -343,7 +374,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Columns left: Detail Panel */}
-            <div className="lg:col-span-5 space-y-8">
+            <Reveal className="lg:col-span-5 space-y-8">
               <div>
                 <span className="text-xs uppercase tracking-[0.3em] text-[#d4af37] block mb-3 font-display">
                   {lang === 'en' ? 'Reservations & Address' : 'Κρατήσεις & Διεύθυνση'}
@@ -472,14 +503,14 @@ export default function App() {
                   </a>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Column right: Map Representation / high fidelity location visual cards */}
-            <div className="lg:col-span-7">
+            <Reveal delay={0.2} className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
                 className="bg-[#091122] rounded-2xl overflow-hidden border border-luxury-gold/25 shadow-2xl aspect-[16/10] relative flex items-center justify-center group"
               >
                 {/* Fake luxury static dark map rendering with golden trace elements */}
@@ -516,7 +547,7 @@ export default function App() {
                   </a>
                 </div>
               </motion.div>
-            </div>
+            </Reveal>
 
           </div>
         </div>
