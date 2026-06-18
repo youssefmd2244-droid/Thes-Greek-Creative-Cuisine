@@ -45,7 +45,7 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
 }
 
 export default function MenuSection({ lang }: MenuSectionProps) {
-  const [activeTab, setActiveTab] = useState<'food' | 'drinks' | 'addons'>('food');
+  const [activeTab, setActiveTab] = useState<'food' | 'chefs' | 'drinks' | 'addons'>('food');
 
   const t = {
     titleEn: 'Creative Culinary Showcase',
@@ -54,6 +54,8 @@ export default function MenuSection({ lang }: MenuSectionProps) {
     subtitleEl: 'Φτιαγμένο με εκλεκτά υλικά του Αιγαίου, συνδυάζοντας τις πατροπαράδοτες μεθόδους με τη σύγχρονη παρουσίαση.',
     tabFoodEn: 'Food',
     tabFoodEl: 'Φαγητό',
+    tabChefsEn: "Chef's Choice",
+    tabChefsEl: 'Επιλογές Σεφ',
     tabDrinksEn: 'Drinks & Wines',
     tabDrinksEl: 'Ποτά & Κρασιά',
     tabAddonsEn: 'Add-ons & Desserts',
@@ -126,6 +128,7 @@ export default function MenuSection({ lang }: MenuSectionProps) {
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-16 max-w-xl mx-auto">
           {[
             { key: 'food', labelEn: t.tabFoodEn, labelEl: t.tabFoodEl },
+            { key: 'chefs', labelEn: t.tabChefsEn, labelEl: t.tabChefsEl },
             { key: 'drinks', labelEn: t.tabDrinksEn, labelEl: t.tabDrinksEl },
             { key: 'addons', labelEn: t.tabAddonsEn, labelEl: t.tabAddonsEl }
           ].map((tab) => {
@@ -133,7 +136,7 @@ export default function MenuSection({ lang }: MenuSectionProps) {
             return (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key as 'food' | 'drinks' | 'addons')}
+                onClick={() => setActiveTab(tab.key as 'food' | 'chefs' | 'drinks' | 'addons')}
                 className={`px-6 py-3 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 font-sans font-medium cursor-pointer flex-1 text-center min-w-[140px] ${
                   isSelected
                     ? 'bg-[#d4af37] text-[#050914] shadow-[0_4px_20px_rgba(212,175,55,0.35)]'
@@ -176,8 +179,8 @@ export default function MenuSection({ lang }: MenuSectionProps) {
                       </span>
                     )}
 
-                    {/* Price badge — food only */}
-                    {activeTab === 'food' && (
+                    {/* Price badge — food & chef's choice */}
+                    {(activeTab === 'food' || activeTab === 'chefs') && (
                       <span className="absolute bottom-4 right-4 bg-luxury-navy/95 backdrop-blur border border-luxury-gold text-luxury-gold text-sm font-semibold px-4 py-1.5 rounded-lg shadow-xl font-mono">
                         {item.price} {t.currency}
                       </span>
