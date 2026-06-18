@@ -1,0 +1,6 @@
+{
+  "name": "Thes Greek Creative Cuisine",
+  "description": "An elegant, luxury presentation website for Thes 'Greek Creative Cuisine' in Psiri, Athens, crafted with immersive scroll animations, PWA offline support, and bilingual menu experience, featuring the expertise of digital solutions partner ICON Code.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
