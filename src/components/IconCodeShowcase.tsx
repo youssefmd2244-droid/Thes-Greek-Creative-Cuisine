@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Terminal, Shield, Percent, Code, ShoppingCart, BarChart, Palette, Navigation, CheckCircle, Smartphone, ExternalLink, Mail, PhoneCall, HelpCircle } from 'lucide-react';
+import { Code, ShoppingCart, BarChart, Palette, CheckCircle, ExternalLink, Mail } from 'lucide-react';
 import { Language } from '../types';
 
 interface IconCodeShowcaseProps {
