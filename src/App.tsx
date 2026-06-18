@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'motion/react';
-import { Clock, MapPin, Phone, MessageSquare, Star, Sparkles, ChevronDown, Award, Compass, Heart, Facebook, Mail, MessageCircle } from 'lucide-react';
+import { motion, useInView } from 'motion/react';
+import { Clock, MapPin, Phone, Star, Sparkles, ChevronDown, Award, Compass, Facebook, Mail, MessageCircle } from 'lucide-react';
 
 import { Language } from './types';
 import Header from './components/Header';
