@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-luxury-navy: #050914;
+  --color-luxury-sea: #0a1426;
+  --color-luxury-deep: #0e1e36;
+  --color-luxury-gold: #d4af37;
+  --color-luxury-gold-hover: #f1cc5b;
+  --color-luxury-sand: #fbf8f3;
+  --color-luxury-stone: #ece8e1;
+  
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@layer utilities {
+  .glow-gold {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+  .glow-green {
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+  }
+  .glow-blue {
+    box-shadow: 0 0 15px rgba(59, 89, 152, 0.4);
+  }
+  .font-editorial {
+    font-family: var(--font-serif);
+  }
+  .text-shadow-gold {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+}
+
+/* Custom keyframes for float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050914;
+}
+::-webkit-scrollbar-thumb {
+  background: #111e35;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Fine-tune scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
